@@ -7,6 +7,7 @@ namespace App\Services\BookService\Impl;
 use App\Book;
 use App\Repositories\Interfaces\BookRepositoryInterface;
 use App\Services\BookService\BookServiceInterface;
+use Illuminate\Support\Facades\Session;
 
 class BookServiceImpl implements BookServiceInterface
 {
@@ -20,6 +21,15 @@ class BookServiceImpl implements BookServiceInterface
     public function getAll()
     {
         return $this->bookRepository->getAll();
+    }
+
+    public function insertView($id){
+        $productKey='product_'.$id;
+        if (!Session::has($productKey)){
+            $this->bookRepository->insertView($id);
+            Session::put($productKey,1);
+            Session::forget($productKey);
+        }
     }
 
     public function getbyId($id)
@@ -65,8 +75,18 @@ class BookServiceImpl implements BookServiceInterface
         $this->bookRepository->create($newBook);
     }
 
-    public function filterByKind($idKind,$kind_id)
+    public function filterByKind($idKind, $kind_id)
     {
-        return $this->bookRepository->filterByKind($idKind,$kind_id);
+        return $this->bookRepository->filterByKind($idKind, $kind_id);
+    }
+
+    public function showHome()
+    {
+        if (Session::has('login') && Session::get('login')) {
+            return true;
+        }
+        $message = 'Bạn chưa đăng nhập.';
+        Session::flash('not-login', $message);
+        return false;
     }
 }

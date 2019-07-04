@@ -17,12 +17,6 @@ class KindController extends Controller
         $this->kindService = $kindService;
     }
 
-    public function index()
-    {
-        $kinds = $this->kindService->getAll();
-        return view('index', compact('kinds'));
-    }
-
     public function create()
     {
         $kinds = $this->kindService->getAll();
@@ -33,6 +27,6 @@ class KindController extends Controller
     {
         $kind=$request->all();
         $this->kindService->store($kind);
-        return redirect()->route('Kind.index');
+        return redirect()->route('home.index');
     }
 }

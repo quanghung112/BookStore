@@ -29,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\BookService\BookServiceInterface::class,
             \App\Services\BookService\Impl\BookServiceImpl::class
         );
+        $this->app->singleton(
+            \App\Services\Login\UserServiceInterface::class,
+            \App\Services\Login\Impl\UserServiceImpl::class
+        );
+
     }
 
     /**

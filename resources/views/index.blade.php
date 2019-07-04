@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{{route('Kind.index')}}">Home</a>
+    <a class="navbar-brand" href="{{route('home.index')}}">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -40,14 +40,18 @@
                    aria-haspopup="true" aria-expanded="false">
                     Kinds
                 </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @forelse($kinds as $kind)
-                        <a class="dropdown-item" href="{{route('Book.filter',$kind->id)}}" value="{{$kind->id}}">{{$kind->nameKind}}({{count($kind->book)}})</a>
-                        @empty
-                            <span class="dropdown-item">Not Kind</span>
-                        @endforelse
-                    </div>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @forelse($kinds as $kind)
+                        <a class="dropdown-item" href="{{route('Book.filter',$kind->id)}}"
+                           value="{{$kind->id}}">{{$kind->nameKind}}({{count($kind->book)}})</a>
+                    @empty
+                        <span class="dropdown-item">Not Kind</span>
+                    @endforelse
+                </div>
             </li>
+            @if (Session::has('login'))
+                <a href="{{route('user.logout')}}"><button class="btn btn-outline-success my-2 my-sm-0" >Logout</button></a>
+            @endif
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

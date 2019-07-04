@@ -18,6 +18,16 @@ class BookController extends Controller
         $this->kindService = $kindService;
     }
 
+    public function index()
+    {
+        $checkLogin=$this->bookService->showHome();
+        if ($checkLogin){
+            $kinds = $this->kindService->getAll();
+            return view('index', compact('kinds'));
+        }
+        return view('Login.Login');
+    }
+
     public function showList()
     {
         $books = $this->bookService->getAll();
@@ -47,6 +57,7 @@ class BookController extends Controller
     public function detail($id)
     {
         $book = $this->bookService->getbyId($id);
+        $this->bookService->insertView($id);
         $kinds = $this->kindService->getAll();
         return view('Book.detail', compact('book', 'kinds'));
     }

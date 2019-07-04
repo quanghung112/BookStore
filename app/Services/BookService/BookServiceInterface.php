@@ -17,4 +17,8 @@ interface BookServiceInterface
     public function upgrade($object, $id);
 
     public function filterByKind($idKind,$kind_id);
+
+    public function showHome();
+
+    public function insertView($id);
 }

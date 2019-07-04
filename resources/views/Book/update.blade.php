@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <select class="custom-select" name="kind">
-                        <option selected>{{$book->kind->nameKind}}</option>
+                        <option value="{{$book->kind_id}}" >{{$book->kind->nameKind}}</option>
                         @forelse($kinds as $kind)
                             @if($kind->id!=$book->kind_id)
                             <option value="{{$kind->id}}">{{$kind->nameKind}}</option>

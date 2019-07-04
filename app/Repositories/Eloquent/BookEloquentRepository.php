@@ -24,5 +24,9 @@ class BookEloquentRepository extends EloquentRepository implements BookRepositor
         $books=$this->model->where('kind_id',$kindFilter->id)->paginate(5);
         return $books;
     }
+    public function insertView($id)
+    {
+        $this->model->where('id',$id)->increment('view_count');
+    }
 }
 

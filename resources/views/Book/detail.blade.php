@@ -12,6 +12,7 @@
             <li class="list-group-item">Author: {{$book->author}}</li>
             <li class="list-group-item">Information: {{$book->information}}</li>
             <li class="list-group-item">Datepublish: {{$book->datePublish}}</li>
+            <li class="list-group-item">Views: {{$book->view_count}}</li>
         </ul>
     </div>
     <a  href="{{route('Book.edit',$book->id)}} "><button type="button" class="btn btn-primary" >Uprade Information</button></a>
